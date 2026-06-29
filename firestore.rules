@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if the authenticated user is an Owner
+    function isOwner() {
+      return request.auth != null && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "owner";
+    }
+
+    // Helper: Check if the user is authenticated and matching target uid
+    function isSelf(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isOwner() || isSelf(userId);
+      allow write: if isOwner(); // Only owner can add or edit accounts
+
+      // Subcollection: Rate History (salary revision logs)
+      match /rateHistory/{rateId} {
+        allow read: if isOwner() || isSelf(userId);
+        allow write: if isOwner();
+      }
+    }
+
+    // Attendance Collection
+    match /attendance/{attendanceId} {
+      allow read: if isOwner() || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow write: if isOwner(); // Only Owner logs attendance
+      
+      // Subcollection: History audit logs
+      match /history/{historyId} {
+        allow read: if isOwner();
+        allow write: if isOwner();
+      }
+    }
+
+    // Payments Collection
+    match /payments/{paymentId} {
+      allow read: if isOwner() || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow write: if isOwner(); // Only Owner logs payouts
+    }
+
+    // Advances Collection
+    match /advances/{advanceId} {
+      allow read: if isOwner() || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow write: if isOwner(); // Only Owner logs advances
+    }
+
+    // System Activities Log
+    match /activities/{activityId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // System Global Settings (Owner only writes, general read access for auth users)
+    match /settings/{settingId} {
+      allow read: if request.auth != null;
+      allow write: if isOwner();
+    }
+  }
+}
