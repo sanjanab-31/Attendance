@@ -7,7 +7,8 @@ import {
   FileBarChart2,
   User,
   DollarSign,
-  History
+  History,
+  Sparkles
 } from "lucide-react";
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -33,10 +34,18 @@ export default function Sidebar({ isOpen, onClose }) {
 
   return (
     <aside
-      className={`fixed md:sticky top-16 bottom-0 left-0 w-64 border-r border-slate-200 bg-white flex flex-col h-[calc(100vh-4rem)] z-40 transition-transform duration-300 transform md:transform-none ${
+      className={`fixed md:sticky top-0 bottom-0 left-0 w-64 border-r border-slate-200 bg-white flex flex-col h-screen z-40 transition-transform duration-300 transform md:transform-none ${
         isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       }`}
     >
+      {/* Logo Area */}
+      <div className="h-16 flex items-center gap-3 px-6 border-b border-transparent">
+        <Sparkles className="w-5 h-5 text-[#71d300]" />
+        <span className="font-bold text-[#0d2702] tracking-tight text-base">
+          ESA ATTENDANCE
+        </span>
+      </div>
+
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {links.map((link) => {
           const Icon = link.icon;

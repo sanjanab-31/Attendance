@@ -1,222 +1,154 @@
-import { useState, useEffect } from "react";
-import { saveAttendanceRecord } from "../../services/attendanceService";
-import { useAuth } from "../../context/AuthContext";
-import { Check, Loader2, AlertCircle, Edit2, X } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, Check } from "lucide-react";
 
-export default function AttendanceRow({ employee, initialRecord, dateStr }) {
-  const { currentUser } = useAuth();
+// Helper for avatar background colors based on name
+const getAvatarColor = (name) => {
+  const colors = ["bg-emerald-100 text-emerald-700", "bg-blue-100 text-blue-700", "bg-amber-100 text-amber-700", "bg-rose-100 text-rose-700", "bg-purple-100 text-purple-700"];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colors[Math.abs(hash) % colors.length];
+};
 
-  const [workingHours, setWorkingHours] = useState("");
-  const [otHours, setOtHours] = useState("");
-  const [isHoliday, setIsHoliday] = useState(false);
-  const [remarks, setRemarks] = useState("");
+const getInitials = (name) => {
+  return name.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
+};
 
-  const [isEditing, setIsEditing] = useState(false);
+export default function AttendanceRow({ employee, record, onChange }) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // Status logs
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-
-  // Populate existing records if loaded
   useEffect(() => {
-    if (initialRecord) {
-      setWorkingHours(initialRecord.workingHours !== undefined ? initialRecord.workingHours.toString() : "");
-      setOtHours(initialRecord.otHours !== undefined ? initialRecord.otHours.toString() : "");
-      setIsHoliday(!!initialRecord.isHoliday);
-      setRemarks(initialRecord.remarks || "");
-      setIsEditing(false); // Default to view mode if record exists
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Safe defaults if record is missing
+  const currentRecord = record || {
+    status: "Present",
+    workingHours: "",
+    otHours: "",
+    isHoliday: false,
+    remarks: ""
+  };
+
+  const handleFieldChange = (field, value) => {
+    // If holiday is checked, reset hours
+    if (field === 'isHoliday') {
+      if (value) {
+        onChange({ ...currentRecord, [field]: value, workingHours: "0", otHours: "0" });
+      } else {
+        onChange({ ...currentRecord, [field]: value, workingHours: "", otHours: "" });
+      }
     } else {
-      setWorkingHours("");
-      setOtHours("");
-      setIsHoliday(false);
-      setRemarks("");
-      setIsEditing(true); // Default to edit mode if no record
-    }
-    setSuccess(false);
-    setError("");
-  }, [initialRecord, dateStr]);
-
-  // Adjust hours if holiday is toggled
-  const handleHolidayToggle = (checked) => {
-    setIsHoliday(checked);
-    if (checked) {
-      setWorkingHours("0");
-      setOtHours("0");
-    } else {
-      setWorkingHours("");
-      setOtHours("");
+      onChange({ ...currentRecord, [field]: value });
     }
   };
 
-  const handleCancel = () => {
-    if (initialRecord) {
-      setWorkingHours(initialRecord.workingHours !== undefined ? initialRecord.workingHours.toString() : "");
-      setOtHours(initialRecord.otHours !== undefined ? initialRecord.otHours.toString() : "");
-      setIsHoliday(!!initialRecord.isHoliday);
-      setRemarks(initialRecord.remarks || "");
-      setIsEditing(false);
-      setError("");
-    }
-  };
-
-  const handleSave = async () => {
-    setError("");
-    setSuccess(false);
-
-    // Validate inputs
-    const wh = parseFloat(workingHours);
-    const ot = parseFloat(otHours);
-
-    if (workingHours === "" && !isHoliday) {
-      setError("Hours required.");
-      return;
-    }
-    if (isNaN(wh) || wh < 0) {
-      setError("Cannot be negative.");
-      return;
-    }
-    if (otHours !== "" && (isNaN(ot) || ot < 0)) {
-      setError("OT cannot be negative.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const record = {
-        name: employee.name,
-        hourRate: employee.hourRate || 0,
-        otHourRate: employee.otHourRate || 0,
-        workingHours: isHoliday ? 0 : wh,
-        otHours: isHoliday ? 0 : (otHours === "" ? 0 : ot),
-        isHoliday,
-        remarks: remarks.trim()
-      };
-
-      await saveAttendanceRecord(employee.uid, dateStr, record, currentUser);
-      setSuccess(true);
-      setIsEditing(false);
-      setTimeout(() => setSuccess(false), 2000);
-    } catch (err) {
-      setError("Failed to save.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const hrRate = employee.hourRate !== undefined ? parseFloat(employee.hourRate) : 0;
-  const otRate = employee.otHourRate !== undefined ? parseFloat(employee.otHourRate) : 0;
+  const avatarClass = getAvatarColor(employee.name);
 
   return (
-    <tr className="hover:bg-slate-50 transition-colors text-xs font-semibold">
-      <td className="py-3 px-6">
-        <div>
-          <div className="font-bold text-slate-900">{employee.name}</div>
+    <tr className="hover:bg-slate-50 transition-colors bg-white text-sm font-semibold border-b border-slate-100 last:border-0 table table-fixed w-full">
+      <td className="py-4 px-6 w-[25%]">
+        <div className="flex items-center gap-3">
+          <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold ${avatarClass}`}>
+            {getInitials(employee.name)}
+          </div>
+          <div>
+            <div className="font-bold text-slate-900">{employee.name}</div>
+          </div>
         </div>
       </td>
-      <td className="py-3 px-6 text-slate-500 font-medium font-mono">
-        ${hrRate.toFixed(2)} / ${otRate.toFixed(2)}
+      <td className="py-4 px-6 w-[15%]">
+        <div className="relative w-36" ref={dropdownRef}>
+          <button
+            type="button"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="w-full flex items-center justify-between px-3 py-2 bg-white border border-slate-200 hover:border-[#71d300] focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-sm text-slate-700 outline-none cursor-pointer shadow-sm transition-all"
+          >
+            <span className="font-semibold flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${
+                currentRecord.status === 'Present' ? 'bg-[#71d300]' : 
+                currentRecord.status === 'Absent' ? 'bg-rose-500' : 'bg-amber-400'
+              }`}></span>
+              {currentRecord.status}
+            </span>
+            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+          
+          {dropdownOpen && (
+            <div className="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden py-1">
+              {['Present', 'Absent', 'Half Day'].map((status) => (
+                <button
+                  type="button"
+                  key={status}
+                  className={`w-full text-left px-3 py-2 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors ${currentRecord.status === status ? 'bg-slate-50 text-[#0d2702]' : 'text-slate-600'}`}
+                  onClick={() => {
+                    handleFieldChange('status', status);
+                    setDropdownOpen(false);
+                  }}
+                >
+                  <span className={`w-2 h-2 rounded-full ${
+                    status === 'Present' ? 'bg-[#71d300]' : 
+                    status === 'Absent' ? 'bg-rose-500' : 'bg-amber-400'
+                  }`}></span>
+                  {status}
+                  {currentRecord.status === status && <Check className="w-4 h-4 ml-auto text-[#71d300]" />}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </td>
-      <td className="py-3 px-6 text-slate-700">
-        {!isEditing ? (
-          <span className="font-bold">{isHoliday ? "-" : workingHours || "-"}</span>
-        ) : (
+      <td className="py-4 px-6 w-[15%]">
+        <div className="relative w-24">
           <input
             type="number"
-            disabled={isHoliday}
-            placeholder={isHoliday ? "0" : "Hours"}
-            value={workingHours}
-            onChange={(e) => setWorkingHours(e.target.value)}
-            className="w-20 px-2 py-1 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none disabled:opacity-50"
+            disabled={currentRecord.isHoliday}
+            value={currentRecord.workingHours}
+            onChange={(e) => handleFieldChange('workingHours', e.target.value)}
+            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
           />
-        )}
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">h</span>
+        </div>
       </td>
-      <td className="py-3 px-6 text-slate-700">
-        {!isEditing ? (
-          <span className="font-bold">{isHoliday ? "-" : otHours || "-"}</span>
-        ) : (
+      <td className="py-4 px-6 w-[15%]">
+        <div className={`relative w-24 ${currentRecord.otHours > 0 ? 'ring-1 ring-[#71d300] rounded-lg' : ''}`}>
           <input
             type="number"
-            disabled={isHoliday}
-            placeholder={isHoliday ? "0" : "OT"}
-            value={otHours}
-            onChange={(e) => setOtHours(e.target.value)}
-            className="w-20 px-2 py-1 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none disabled:opacity-50"
+            disabled={currentRecord.isHoliday}
+            value={currentRecord.otHours}
+            onChange={(e) => handleFieldChange('otHours', e.target.value)}
+            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
           />
-        )}
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">h</span>
+        </div>
       </td>
-      <td className="py-3 px-6 text-center">
-        {!isEditing ? (
-          <div className="flex justify-center">
-            {isHoliday ? (
-              <span className="w-5 h-5 bg-[#71d300] text-[#0d2702] rounded-md flex items-center justify-center">
-                <Check className="w-3.5 h-3.5" />
-              </span>
-            ) : (
-              <span className="w-5 h-5 bg-slate-200 rounded-md block"></span>
-            )}
-          </div>
-        ) : (
+      <td className="py-4 px-6 w-[10%]">
+        <label className="relative inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
-            checked={isHoliday}
-            onChange={(e) => handleHolidayToggle(e.target.checked)}
-            className="w-4 h-4 text-[#71d300] border-slate-300 focus:ring-[#71d300] rounded cursor-pointer"
+            className="sr-only peer"
+            checked={currentRecord.isHoliday}
+            onChange={(e) => handleFieldChange('isHoliday', e.target.checked)}
           />
-        )}
+          <div className="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#71d300]"></div>
+        </label>
       </td>
-      <td className="py-3 px-6 text-slate-600">
-        {!isEditing ? (
-          <span className="truncate block max-w-[150px]">{remarks || "-"}</span>
-        ) : (
-          <input
-            type="text"
-            placeholder="Shift details..."
-            value={remarks}
-            onChange={(e) => setRemarks(e.target.value)}
-            className="w-full px-2 py-1 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
-          />
-        )}
-      </td>
-      <td className="py-3 px-6 text-right">
-        <div className="flex items-center justify-end gap-2.5">
-          {success && (
-            <span className="text-emerald-600 flex items-center gap-1 text-[10px] font-bold">
-              <Check className="w-3.5 h-3.5" /> Saved
-            </span>
-          )}
-          {error && (
-            <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold">
-              <AlertCircle className="w-3.5 h-3.5" /> {error}
-            </span>
-          )}
-          {!isEditing ? (
-            <button
-              onClick={() => setIsEditing(true)}
-              className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-[#0d2702] font-bold text-[10px] uppercase tracking-wider rounded-lg transition-colors flex items-center gap-1"
-            >
-              <Edit2 className="w-3 h-3" /> Edit
-            </button>
-          ) : (
-            <>
-              {initialRecord && (
-                <button
-                  onClick={handleCancel}
-                  className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-              <button
-                onClick={handleSave}
-                disabled={loading}
-                className="px-3.5 py-1.5 bg-[#71d300] hover:bg-[#5db300] text-[#0d2702] font-bold text-[10px] uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50 flex items-center gap-1"
-              >
-                {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : "Save"}
-              </button>
-            </>
-          )}
-        </div>
+      <td className="py-4 px-6 w-[20%]">
+        <input
+          type="text"
+          placeholder="Add note..."
+          value={currentRecord.remarks}
+          onChange={(e) => handleFieldChange('remarks', e.target.value)}
+          className="w-full px-3 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none shadow-sm placeholder:text-slate-400 placeholder:font-normal transition-colors"
+        />
       </td>
     </tr>
   );

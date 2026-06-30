@@ -19,7 +19,8 @@ import {
   BarChart3,
   Award,
   Activity,
-  Clock
+  Clock,
+  ChevronDown
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -53,6 +54,7 @@ export default function Reports() {
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [showExportMenu, setShowExportMenu] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -401,7 +403,7 @@ export default function Reports() {
   }
 
   return (
-    <div className="space-y-6 text-slate-800 font-sans print:bg-white print:p-0">
+    <div className="flex-1 flex flex-col min-h-0 text-slate-800 font-sans print:bg-white print:p-0 overflow-hidden">
       {/* Print-Only Header Block */}
       <div className="hidden print:block border-b-2 border-slate-300 pb-5 mb-5">
         <h1 className="text-2xl font-bold uppercase tracking-tight text-[#0d2702]">{companyName}</h1>
@@ -415,7 +417,7 @@ export default function Reports() {
       </div>
 
       {/* Standard UI Layout (hidden on print) */}
-      <div className="print:hidden space-y-6">
+      <div className="print:hidden flex flex-col gap-6 flex-1 min-h-0 overflow-hidden">
         <div>
           <h1 className="text-2xl font-extrabold text-[#0d2702]">Reports & Analytics</h1>
           <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -423,119 +425,43 @@ export default function Reports() {
           </p>
         </div>
 
-        {/* Global Filters Panel */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 bg-white p-4 border border-slate-200 rounded-lg shadow-sm">
-          <div>
-            <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Employee Selector</label>
-            <select
-              value={selectedEmployee}
-              onChange={(e) => setSelectedEmployee(e.target.value)}
-              className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
-            >
-              <option value="all">All Employees</option>
-              {employees.map((emp) => (
-                <option key={emp.uid} value={emp.uid}>{emp.name}</option>
-              ))}
-            </select>
-          </div>
 
-          <div>
-            <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Timeframe Presets</label>
-            <select
-              value={datePreset}
-              onChange={(e) => setDatePreset(e.target.value)}
-              className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
-            >
-              <option value="today">Today</option>
-              <option value="thisWeek">This Week (7 Days)</option>
-              <option value="thisMonth">This Month (30 Days)</option>
-              <option value="thisYear">This Year</option>
-              <option value="custom">Custom Date Range</option>
-            </select>
-          </div>
 
-          {datePreset === "custom" && (
-            <div>
-              <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Start Date</label>
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
-              />
-            </div>
-          )}
 
-          {datePreset === "custom" && (
-            <div>
-              <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">End Date</label>
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
-              />
-            </div>
-          )}
-        </div>
 
-        {/* Statistics Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
-          <SummaryCard title="Total Employees" value={totalEmployees} icon={Users} valueClass="text-slate-700" />
-          <SummaryCard title="Hours Worked" value={`${totalWorkingHours} hrs`} icon={Calendar} valueClass="text-slate-700" />
-          <SummaryCard title="Overtime Hours" value={`${totalOTHours} hrs`} icon={Calendar} valueClass="text-slate-700" />
-          <SummaryCard title="Salary Earned" value={`₹${totalSalaryEarned.toFixed(2)}`} icon={IndianRupee} valueClass="text-slate-700" />
-          <SummaryCard title="Salary Paid" value={`₹${totalSalaryPaid.toFixed(2)}`} icon={CreditCard} valueClass="text-slate-700" />
-          <SummaryCard title="Advances Given" value={`₹${totalAdvanceGiven.toFixed(2)}`} icon={Coins} valueClass="text-slate-700" />
-          <SummaryCard
-            title="Net Outstanding"
-            value={`₹${totalPendingSalary.toFixed(2)}`}
-            icon={IndianRupee}
-            valueClass={totalPendingSalary >= 0 ? "text-emerald-600" : "text-rose-600"}
-          />
-        </div>
-
-        {/* Report Tabs Selection Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 pt-2">
+        {/* Report Tabs */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-b border-slate-200 pb-4 mb-4">
           {[
-            { id: "analytics", label: "Analytics Section", icon: BarChart3, desc: "Visual graphs, insights & leaderboards." },
-            { id: "attendance", label: "Attendance Report", icon: Calendar, desc: "Detailed logs of daily employee shifts." },
-            { id: "salary", label: "Salary Report", icon: TrendingUp, desc: "Earnings details including base rate and OT rates." },
-            { id: "payment", label: "Payment Report", icon: CreditCard, desc: "Roster of processed salary payouts." },
-            { id: "advance", label: "Advance Report", icon: Coins, desc: "Roster of issued advances." },
-            { id: "employee", label: "Employee Report", icon: Users, desc: "Contact details and baseline salary rates." },
-            { id: "payroll", label: "Payroll Summary", icon: FileText, desc: "Net ledger breakdown per employee." }
+            { id: "analytics", label: "Analytics Section", icon: BarChart3 },
+            { id: "attendance", label: "Attendance Report", icon: Calendar },
+            { id: "salary", label: "Salary Report", icon: TrendingUp },
+            { id: "payment", label: "Payment Report", icon: CreditCard },
+            { id: "advance", label: "Advance Report", icon: Coins },
+            { id: "employee", label: "Employee Report", icon: Users },
+            { id: "payroll", label: "Payroll Summary", icon: FileText }
           ].map((report) => {
             const Icon = report.icon;
+            const isActive = activeReport === report.id;
             return (
               <button
                 key={report.id}
                 onClick={() => setActiveReport(report.id)}
-                className={`p-4 bg-white border rounded-lg text-left shadow-sm transition-all flex flex-col justify-between ${
-                  activeReport === report.id
-                    ? "border-[#71d300] ring-1 ring-[#71d300]"
-                    : "border-slate-200 hover:border-slate-300"
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-full transition-colors shadow-sm ${
+                  isActive
+                    ? "bg-[#71d300] text-[#0d2702]"
+                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
                 }`}
               >
-                <div>
-                  <Icon className={`w-5 h-5 mb-2 ${activeReport === report.id ? "text-[#0d2702]" : "text-slate-400"}`} />
-                  <h3 className="text-xs font-bold text-slate-800">{report.label}</h3>
-                  <p className="text-[10px] text-slate-400 font-semibold mt-1 leading-relaxed">{report.desc}</p>
-                </div>
-                <span className={`inline-block text-[9px] font-bold mt-4 uppercase tracking-wider ${
-                  activeReport === report.id ? "text-[#0d2702]" : "text-slate-500 hover:text-[#0d2702]"
-                }`}>
-                  {activeReport === report.id ? "Selected" : "Open Section →"}
-                </span>
+                {/* <Icon className={`w-4 h-4 ${isActive ? "text-[#0d2702]" : "text-slate-400"}`} /> */}
+                {report.label}
               </button>
             );
           })}
         </div>
-      </div>
 
       {/* Analytics Dashboard Visual Panels */}
       {activeReport === "analytics" && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 print:hidden">
+        <div className="flex-1 overflow-y-auto thin-scrollbar grid grid-cols-1 lg:grid-cols-2 gap-6 print:hidden pb-6">
           
           {/* Panel 1: Working Hours & OT Allocation */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
@@ -671,7 +597,7 @@ export default function Reports() {
 
       {/* Data Table Area (hidden when Analytics tab is selected) */}
       {activeReport !== "analytics" && (
-        <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4 print:border-0 print:p-0 print:shadow-none">
+        <div className="flex-1 flex flex-col min-h-0 bg-white border border-slate-200 rounded-lg p-6 shadow-sm gap-4 print:border-0 print:p-0 print:shadow-none">
           
           {/* Title, Search & Export Actions Row (hidden on print) */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-3 print:hidden">
@@ -681,47 +607,77 @@ export default function Reports() {
             <div className="flex flex-wrap items-center gap-2">
               {/* Search Input */}
               <div className="relative">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder="Search name..."
                   value={searchTerm}
                   onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-                  className="pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none w-44"
+                  className="pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none w-52 shadow-sm transition-colors hover:border-slate-300"
                 />
               </div>
+
+              {/* Date Filter */}
+              <div className="relative flex items-center">
+                <select
+                  value={datePreset}
+                  onChange={(e) => setDatePreset(e.target.value)}
+                  className="appearance-none pl-3 pr-8 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none w-36 shadow-sm transition-colors hover:border-slate-300 cursor-pointer"
+                >
+                  <option value="today">Today</option>
+                  <option value="thisWeek">This Week</option>
+                  <option value="thisMonth">This Month</option>
+                  <option value="thisYear">This Year</option>
+                  <option value="custom">Custom Range</option>
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+              </div>
+              
+              {datePreset === "custom" && (
+                <>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
+                  />
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
+                  />
+                </>
+              )}
               
               {/* Export Actions dropdown/buttons */}
-              <button
-                onClick={() => handleExport("CSV")}
-                className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-colors border border-slate-200"
-              >
-                CSV
-              </button>
-              <button
-                onClick={() => handleExport("EXCEL")}
-                className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-colors border border-slate-200"
-              >
-                Excel
-              </button>
-              <button
-                onClick={handlePrintPDF}
-                className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-colors border border-slate-200"
-              >
-                <Printer className="w-3 h-3" /> PDF
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setShowExportMenu(!showExportMenu)}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-[#0d2702] hover:bg-[#71d300] text-white hover:text-[#0d2702] text-xs font-bold uppercase tracking-wider rounded-lg transition-colors border border-transparent shadow-sm"
+                >
+                  <Download className="w-4 h-4" /> Export
+                </button>
+                {showExportMenu && (
+                  <div className="absolute right-0 top-full mt-1 w-32 bg-white border border-slate-200 rounded-lg shadow-lg z-50 py-1 overflow-hidden">
+                    <button onClick={() => { handleExport("CSV"); setShowExportMenu(false); }} className="w-full text-left px-4 py-2.5 text-xs font-bold hover:bg-slate-50 text-slate-700 transition-colors">Export CSV</button>
+                    <button onClick={() => { handleExport("EXCEL"); setShowExportMenu(false); }} className="w-full text-left px-4 py-2.5 text-xs font-bold hover:bg-slate-50 text-slate-700 transition-colors">Export Excel</button>
+                    <button onClick={() => { handlePrintPDF(); setShowExportMenu(false); }} className="w-full text-left px-4 py-2.5 text-xs font-bold hover:bg-slate-50 text-slate-700 transition-colors">Print PDF</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Data Tables */}
-          <div className="overflow-x-auto print:overflow-visible">
-            {paginatedData.length === 0 ? (
+          <div className="flex-1 overflow-auto thin-scrollbar relative print:overflow-visible print:max-h-none">
+            {finalReportData.length === 0 ? (
               <p className="text-xs text-slate-400 text-center py-6 font-semibold">No report records found matching parameters.</p>
             ) : (
               <table className="w-full text-left text-xs border-collapse print:text-[11px]">
                 <thead>
                   {activeReport === "attendance" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("date")}>Date <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-center" onClick={() => toggleSort("workingHours")}>Working Hours <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -731,7 +687,7 @@ export default function Reports() {
                     </tr>
                   )}
                   {activeReport === "salary" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer font-bold">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee Name <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("earned")}>Salary Earned <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("paid")}>Salary Paid <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -740,7 +696,7 @@ export default function Reports() {
                     </tr>
                   )}
                   {activeReport === "payment" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("date")}>Payment Date <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("amount")}>Amount <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -749,7 +705,7 @@ export default function Reports() {
                     </tr>
                   )}
                   {activeReport === "advance" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("date")}>Advance Date <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("amount")}>Amount <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -758,7 +714,7 @@ export default function Reports() {
                     </tr>
                   )}
                   {activeReport === "employee" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer font-bold">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-center" onClick={() => toggleSort("days")}>Total Working Days <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-center" onClick={() => toggleSort("hours")}>Total Hours <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -767,7 +723,7 @@ export default function Reports() {
                     </tr>
                   )}
                   {activeReport === "payroll" && (
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer font-bold">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-[10px] text-slate-500 uppercase font-bold tracking-wider cursor-pointer sticky top-0 z-10 shadow-sm">
                       <th className="py-2.5 px-4" onClick={() => toggleSort("name")}>Employee Name <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("earned")}>Salary Earned <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
                       <th className="py-2.5 px-4 text-right" onClick={() => toggleSort("paid")}>Salary Paid <ArrowUpDown className="w-3 h-3 inline ml-1 print:hidden" /></th>
@@ -780,7 +736,7 @@ export default function Reports() {
 
                 <tbody className="divide-y divide-slate-100 font-semibold text-slate-700 print:text-black">
                   {activeReport === "attendance" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((a, i) => (
+                    finalReportData.map((a, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 font-bold text-slate-900">{a.date}</td>
                         <td className="py-2 px-4 text-slate-900 font-bold">{a.name}</td>
@@ -792,7 +748,7 @@ export default function Reports() {
                     ))}
 
                   {activeReport === "salary" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((s, i) => (
+                    finalReportData.map((s, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 text-slate-900 font-bold">{s.name}</td>
                         <td className="py-2 px-4 text-right font-mono">₹{s.earned.toFixed(2)}</td>
@@ -803,7 +759,7 @@ export default function Reports() {
                     ))}
 
                   {activeReport === "payment" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((p, i) => (
+                    finalReportData.map((p, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 font-bold text-slate-900">{p.date}</td>
                         <td className="py-2 px-4 text-slate-900 font-bold">{p.name}</td>
@@ -814,7 +770,7 @@ export default function Reports() {
                     ))}
 
                   {activeReport === "advance" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((a, i) => (
+                    finalReportData.map((a, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 font-bold text-slate-900">{a.date}</td>
                         <td className="py-2 px-4 text-slate-900 font-bold">{a.name}</td>
@@ -825,7 +781,7 @@ export default function Reports() {
                     ))}
 
                   {activeReport === "employee" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((e, i) => (
+                    finalReportData.map((e, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 text-slate-900 font-bold">{e.name}</td>
                         <td className="py-2 px-4 text-center">{e.days} days</td>
@@ -836,7 +792,7 @@ export default function Reports() {
                     ))}
 
                   {activeReport === "payroll" &&
-                    (window.matchMedia("print").matches ? finalReportData : paginatedData).map((p, i) => (
+                    finalReportData.map((p, i) => (
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 text-slate-900 font-bold">{p.name}</td>
                         <td className="py-2 px-4 text-right font-mono text-slate-500">₹{p.earned.toFixed(2)}</td>
@@ -855,35 +811,9 @@ export default function Reports() {
           <div className="hidden print:block border-t border-slate-300 pt-4 mt-6 text-[10px] text-slate-400 font-semibold text-right">
             Report Generated by Owner. System Generated Document.
           </div>
-
-          {/* Pagination Footer (hidden on print) */}
-          {totalEntries > 0 && (
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-slate-100 text-xs font-bold text-slate-500 print:hidden">
-              <div>
-                Showing {startIndex + 1} to {Math.min(startIndex + pageSize, totalEntries)} of {totalEntries} entries
-              </div>
-              <div className="flex items-center gap-1.5">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors disabled:opacity-40"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <span>Page {currentPage} of {totalPages}</span>
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                  className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors disabled:opacity-40"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          )}
-
         </div>
       )}
+      </div>
     </div>
   );
 }

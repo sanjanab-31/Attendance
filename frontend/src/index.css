@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
   --text: #0d2702;
   --text-muted: #475569;
@@ -11,7 +15,7 @@
   
   background-color: var(--bg-main);
   color: var(--text);
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
 }
 
 body {
