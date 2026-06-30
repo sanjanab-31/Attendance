@@ -20,7 +20,7 @@ export default function Filters({
           type="date"
           value={joiningDateFilter}
           onChange={(e) => onJoiningDateChange(e.target.value)}
-          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-[#71d300]"
+          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-primary"
         />
       </div>
 
@@ -30,7 +30,7 @@ export default function Filters({
         <select
           value={statusFilter}
           onChange={(e) => onStatusChange(e.target.value)}
-          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-[#71d300]"
+          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-primary"
         >
           <option value="all">All Employees</option>
           <option value="active">Active Only</option>
@@ -43,7 +43,7 @@ export default function Filters({
         <select
           value={sortBy}
           onChange={(e) => onSortByChange(e.target.value)}
-          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-[#71d300]"
+          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-primary"
         >
           <option value="name">Employee Name</option>
           <option value="dateOfJoining">Date Joined</option>
@@ -56,7 +56,7 @@ export default function Filters({
         <select
           value={sortOrder}
           onChange={(e) => onSortOrderChange(e.target.value)}
-          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-[#71d300]"
+          className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10px] text-slate-700 outline-none focus:border-primary"
         >
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>

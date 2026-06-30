@@ -44,10 +44,10 @@ export default function ChangePassword() {
     <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center px-4 font-sans">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-lg p-8 shadow-sm relative z-10">
         <div className="text-center mb-6">
-          <div className="inline-flex p-3 bg-slate-100 rounded-lg mb-3 text-[#0d2702]">
+          <div className="inline-flex p-3 bg-slate-100 rounded-lg mb-3 text-primary-dark">
             <ShieldCheck className="w-6 h-6" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-[#0d2702]">
+          <h1 className="text-xl font-bold tracking-tight text-primary-dark">
             Reset Temporary Password
           </h1>
           <p className="text-slate-500 mt-1.5 text-xs font-semibold leading-relaxed">
@@ -74,7 +74,7 @@ export default function ChangePassword() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Min 6 characters"
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-slate-900 outline-none text-sm"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 outline-none text-sm"
               />
               <button
                 type="button"
@@ -96,14 +96,14 @@ export default function ChangePassword() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm new password"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-slate-900 outline-none text-sm"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 outline-none text-sm"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-[#0d2702] hover:bg-[#153e03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm active:scale-[0.98] disabled:opacity-50"
+            className="w-full py-2.5 bg-primary-dark hover:bg-[#153e03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm active:scale-[0.98] disabled:opacity-50"
           >
             {loading ? "Updating..." : "Update Password & Continue"}
           </button>

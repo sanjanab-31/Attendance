@@ -297,8 +297,8 @@ export default function OwnerProfile() {
     <div className="max-w-5xl mx-auto space-y-6 text-slate-800 font-sans">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0d2702] flex items-center gap-3">
-          <Settings className="w-7 h-7 text-[#0d2702]" />
+        <h1 className="text-2xl font-extrabold text-primary-dark flex items-center gap-3">
+          <Settings className="w-7 h-7 text-primary-dark" />
           My Profile & Settings
         </h1>
         <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -320,7 +320,7 @@ export default function OwnerProfile() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold transition-all border-b-2 -mb-0.5 ${
                 activeTab === tab.id
-                  ? "border-[#71d300] text-[#0d2702]"
+                  ? "border-primary text-primary-dark"
                   : "border-transparent text-slate-500 hover:text-slate-700"
               }`}
             >
@@ -338,21 +338,21 @@ export default function OwnerProfile() {
           {/* Avatar Summary card */}
           <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm flex flex-col items-center text-center">
             <div className="relative">
-              <div className="w-24 h-24 rounded-full bg-slate-100 border-2 border-[#71d300] flex items-center justify-center text-slate-500 overflow-hidden shadow-sm">
+              <div className="w-24 h-24 rounded-full bg-slate-100 border-2 border-primary flex items-center justify-center text-slate-500 overflow-hidden shadow-sm">
                 {activeTab === "company" ? (
                   companyData.logoUrl ? (
                     <img src={companyData.logoUrl} alt="Company Logo" className="w-full h-full object-cover" />
                   ) : (
-                    <Building className="w-12 h-12 text-[#0d2702]" />
+                    <Building className="w-12 h-12 text-primary-dark" />
                   )
                 ) : ownerData.photoUrl ? (
                   <img src={ownerData.photoUrl} alt="Owner Profile" className="w-full h-full object-cover" />
                 ) : (
-                  <User className="w-12 h-12 text-[#0d2702]" />
+                  <User className="w-12 h-12 text-primary-dark" />
                 )}
               </div>
               
-              <label className="absolute bottom-0 right-0 p-1.5 bg-[#0d2702] text-white rounded-full cursor-pointer hover:bg-[#163c03] transition-colors border border-white">
+              <label className="absolute bottom-0 right-0 p-1.5 bg-primary-dark text-white rounded-full cursor-pointer hover:bg-[#163c03] transition-colors border border-white">
                 <Camera className="w-3.5 h-3.5" />
                 <input
                   type="file"
@@ -365,13 +365,13 @@ export default function OwnerProfile() {
             
             {activeTab === "company" ? (
               <>
-                <h3 className="text-base font-bold text-[#0d2702] mt-4">{companyData.name || "Company Name"}</h3>
+                <h3 className="text-base font-bold text-primary-dark mt-4">{companyData.name || "Company Name"}</h3>
                 <span className="text-[9px] text-slate-400 font-bold uppercase mt-1">Enterprise Details</span>
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-[#0d2702] mt-4">{ownerData.name || "Owner Name"}</h3>
-                <span className="inline-block text-[9px] font-bold bg-[#71d300]/15 text-[#0d2702] border border-[#71d300]/25 px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider">
+                <h3 className="text-base font-bold text-primary-dark mt-4">{ownerData.name || "Owner Name"}</h3>
+                <span className="inline-block text-[9px] font-bold bg-primary/15 text-primary-dark border border-primary/25 px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider">
                   System Owner
                 </span>
               </>
@@ -380,7 +380,7 @@ export default function OwnerProfile() {
 
           {/* Security details */}
           <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-4">
-            <h3 className="text-xs font-bold text-[#0d2702] uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <h3 className="text-xs font-bold text-primary-dark uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
               <ShieldCheck className="w-4 h-4 text-slate-400" /> Security Settings
             </h3>
             <div className="space-y-3 text-xs font-semibold text-slate-600">
@@ -411,8 +411,8 @@ export default function OwnerProfile() {
           {activeTab === "owner" && (
             <>
               <form onSubmit={handleUpdateOwner} className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4">
-                <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-                  <User className="w-4.5 h-4.5 text-[#0d2702]" /> Owner Account
+                <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+                  <User className="w-4.5 h-4.5 text-primary-dark" /> Owner Account
                 </h3>
 
                 {ownerSuccess && (
@@ -435,7 +435,7 @@ export default function OwnerProfile() {
                       type="text"
                       value={ownerData.name}
                       onChange={(e) => setOwnerData({ ...ownerData, name: e.target.value })}
-                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                     />
                   </div>
                   <div>
@@ -444,7 +444,7 @@ export default function OwnerProfile() {
                       type="text"
                       value={ownerData.phone}
                       onChange={(e) => setOwnerData({ ...ownerData, phone: e.target.value })}
-                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                     />
                   </div>
                 </div>
@@ -452,7 +452,7 @@ export default function OwnerProfile() {
                 <button
                   type="submit"
                   disabled={ownerLoading}
-                  className="px-5 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                  className="px-5 py-2 bg-primary-dark hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
                 >
                   Save Owner Profile
                 </button>
@@ -460,8 +460,8 @@ export default function OwnerProfile() {
 
               {/* Secure Password Update */}
               <form onSubmit={handleChangePassSubmit} className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4">
-                <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2 flex items-center gap-2">
-                  <Key className="w-4.5 h-4.5 text-[#0d2702]" /> Secure Password Update
+                <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2 flex items-center gap-2">
+                  <Key className="w-4.5 h-4.5 text-primary-dark" /> Secure Password Update
                 </h3>
 
                 {passSuccess && (
@@ -484,7 +484,7 @@ export default function OwnerProfile() {
                       type="password"
                       value={currentPassword}
                       onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                      className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                     />
                   </div>
 
@@ -495,7 +495,7 @@ export default function OwnerProfile() {
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                        className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                       />
                     </div>
                     <div>
@@ -504,7 +504,7 @@ export default function OwnerProfile() {
                         type="password"
                         value={confirmNewPassword}
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
-                        className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                        className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                       />
                     </div>
                   </div>
@@ -513,7 +513,7 @@ export default function OwnerProfile() {
                 <div className="flex gap-2 pt-2">
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+                    className="px-5 py-2 bg-primary-dark hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm"
                   >
                     Change Password
                   </button>
@@ -533,8 +533,8 @@ export default function OwnerProfile() {
           {/* Tab 2: Company Information */}
           {activeTab === "company" && (
             <form onSubmit={handleUpdateCompany} className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-                <Building className="w-4.5 h-4.5 text-[#0d2702]" /> Company Information
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+                <Building className="w-4.5 h-4.5 text-primary-dark" /> Company Information
               </h3>
 
               {companySuccess && (
@@ -557,7 +557,7 @@ export default function OwnerProfile() {
                     type="text"
                     value={companyData.name}
                     onChange={(e) => setCompanyData({ ...companyData, name: e.target.value })}
-                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
                 <div>
@@ -566,7 +566,7 @@ export default function OwnerProfile() {
                     type="text"
                     value={companyData.website}
                     onChange={(e) => setCompanyData({ ...companyData, website: e.target.value })}
-                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
                 <div>
@@ -575,7 +575,7 @@ export default function OwnerProfile() {
                     type="text"
                     value={companyData.phone}
                     onChange={(e) => setCompanyData({ ...companyData, phone: e.target.value })}
-                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
                 <div>
@@ -584,7 +584,7 @@ export default function OwnerProfile() {
                     type="email"
                     value={companyData.email}
                     onChange={(e) => setCompanyData({ ...companyData, email: e.target.value })}
-                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
                 <div className="col-span-2">
@@ -592,7 +592,7 @@ export default function OwnerProfile() {
                   <textarea
                     value={companyData.address}
                     onChange={(e) => setCompanyData({ ...companyData, address: e.target.value })}
-                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none resize-none"
+                    className="w-full mt-1.5 px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none resize-none"
                     rows="3"
                   />
                 </div>
@@ -601,7 +601,7 @@ export default function OwnerProfile() {
               <button
                 type="submit"
                 disabled={companyLoading}
-                className="px-5 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                className="px-5 py-2 bg-primary-dark hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
               >
                 Save Company Details
               </button>
@@ -611,8 +611,8 @@ export default function OwnerProfile() {
           {/* Tab 3: General System Settings */}
           {activeTab === "general" && (
             <form onSubmit={handleUpdateGeneral} className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-                <Globe className="w-4.5 h-4.5 text-[#0d2702]" /> General Settings
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+                <Globe className="w-4.5 h-4.5 text-primary-dark" /> General Settings
               </h3>
 
               {generalSuccess && (
@@ -628,7 +628,7 @@ export default function OwnerProfile() {
                   <select
                     value={generalData.currency}
                     onChange={(e) => setGeneralData({ ...generalData, currency: e.target.value })}
-                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="$">US Dollar ($)</option>
                     <option value="₹">Indian Rupee (₹)</option>
@@ -643,7 +643,7 @@ export default function OwnerProfile() {
                   <select
                     value={generalData.timezone}
                     onChange={(e) => setGeneralData({ ...generalData, timezone: e.target.value })}
-                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="UTC">UTC (Greenwich)</option>
                     <option value="Asia/Kolkata">IST (Asia/Kolkata)</option>
@@ -657,7 +657,7 @@ export default function OwnerProfile() {
                   <select
                     value={generalData.dateFormat}
                     onChange={(e) => setGeneralData({ ...generalData, dateFormat: e.target.value })}
-                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="YYYY-MM-DD">YYYY-MM-DD (2026-06-27)</option>
                     <option value="DD-MM-YYYY">DD-MM-YYYY (27-06-2026)</option>
@@ -670,7 +670,7 @@ export default function OwnerProfile() {
                   <select
                     value={generalData.hourFormat}
                     onChange={(e) => setGeneralData({ ...generalData, hourFormat: e.target.value })}
-                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full mt-1.5 px-2 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="24h">24-Hour Format (18:30)</option>
                     <option value="12h">12-Hour Format (06:30 PM)</option>
@@ -681,7 +681,7 @@ export default function OwnerProfile() {
               <button
                 type="submit"
                 disabled={generalLoading}
-                className="px-5 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                className="px-5 py-2 bg-primary-dark hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
               >
                 Save General Settings
               </button>

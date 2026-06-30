@@ -5,8 +5,8 @@ export default function RecentActivity({ activities = [] }) {
   return (
     <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2">
-          <Activity className="w-4 h-4 text-[#71d300]" />
+        <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2">
+          <Activity className="w-4 h-4 text-primary" />
           System Activity Log
         </h3>
       </div>

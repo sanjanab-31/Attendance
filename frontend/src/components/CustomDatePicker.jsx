@@ -72,9 +72,9 @@ export default function CustomDatePicker({ selectedDate, onChange, onPrevDay, on
           onClick={() => handleSelectDate(d)}
           className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold transition-colors
             ${isSelectedSafe 
-              ? 'bg-[#71d300] text-[#0d2702]' 
+              ? 'bg-primary text-primary-dark' 
               : isToday 
-                ? 'bg-slate-100 text-[#0d2702] border border-slate-200' 
+                ? 'bg-slate-100 text-primary-dark border border-slate-200' 
                 : 'text-slate-600 hover:bg-slate-100'
             }
           `}
@@ -90,7 +90,7 @@ export default function CustomDatePicker({ selectedDate, onChange, onPrevDay, on
           <button onClick={handlePrevMonth} className="p-1 hover:bg-slate-100 rounded-full text-slate-600">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <div className="font-bold text-[#0d2702] text-sm">
+          <div className="font-bold text-primary-dark text-sm">
             {currentMonthDate.toLocaleString('default', { month: 'long' })} {year}
           </div>
           <button onClick={handleNextMonth} className="p-1 hover:bg-slate-100 rounded-full text-slate-600">
@@ -113,24 +113,24 @@ export default function CustomDatePicker({ selectedDate, onChange, onPrevDay, on
   };
 
   return (
-    <div className="flex items-center bg-white border border-slate-200 hover:border-[#71d300] transition-colors rounded-lg shadow-sm" ref={dropdownRef}>
-      <button onClick={onPrevDay} className="p-2.5 hover:bg-[#71d300]/10 text-slate-400 hover:text-[#0d2702] transition-colors border-r border-slate-200">
+    <div className="flex items-center bg-white border border-slate-200 hover:border-primary transition-colors rounded-lg shadow-sm" ref={dropdownRef}>
+      <button onClick={onPrevDay} className="p-2.5 hover:bg-primary/10 text-slate-400 hover:text-primary-dark transition-colors border-r border-slate-200">
         <ChevronLeft className="w-5 h-5" />
       </button>
       
       <div className="relative">
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-[#0d2702] hover:bg-slate-50 transition-colors h-full"
+          className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-primary-dark hover:bg-slate-50 transition-colors h-full"
         >
-          <CalendarDays className="w-4 h-4 text-[#71d300]" />
+          <CalendarDays className="w-4 h-4 text-primary" />
           {formatDate(selectedDate)}
           <CalendarIcon className="w-4 h-4 text-slate-300 hidden sm:block" />
         </button>
         {isOpen && renderCalendar()}
       </div>
 
-      <button onClick={onNextDay} className="p-2.5 hover:bg-[#71d300]/10 text-slate-400 hover:text-[#0d2702] transition-colors border-l border-slate-200">
+      <button onClick={onNextDay} className="p-2.5 hover:bg-primary/10 text-slate-400 hover:text-primary-dark transition-colors border-l border-slate-200">
         <ChevronRight className="w-5 h-5" />
       </button>
     </div>

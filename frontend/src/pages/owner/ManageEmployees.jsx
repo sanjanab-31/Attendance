@@ -31,34 +31,36 @@ export default function ManageEmployees() {
 
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col h-full space-y-6 overflow-hidden">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0d2702]">Manage Employees</h1>
-          <p className="text-slate-500 mt-0.5 text-xs font-semibold">
+          <h1 className="text-2xl font-extrabold text-primary-dark">Manage Employees</h1>
+          <p className="text-slate-500 mt-0.5 text-sm font-semibold">
             View profiles, edit billing rates, process payments, and manage settings.
           </p>
         </div>
 
         <Link
           to="/owner/employees/new"
-          className="flex items-center gap-2 px-4 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm shrink-0"
+          className="flex items-center gap-2 px-4 py-2 bg-primary-dark hover:bg-primary text-white font-bold text-sm uppercase tracking-wider rounded-lg transition-colors shadow-sm shrink-0"
         >
-          <UserPlus className="w-4 h-4" />
+          <UserPlus className="w-5 h-5" />
           Add Employee
         </Link>
       </div>
 
 
       {/* Loading, Empty, or Table Grid Display */}
-      {loading ? (
-        <LoadingState />
-      ) : employees.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <EmployeeTable employees={employees} />
-      )}
+      <div className="flex-1 min-h-0 overflow-hidden rounded-xl">
+        {loading ? (
+          <LoadingState />
+        ) : employees.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <EmployeeTable employees={employees} />
+        )}
+      </div>
     </div>
   );
 }

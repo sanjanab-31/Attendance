@@ -11,7 +11,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 function PageLoader() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="w-10 h-10 border-4 border-[#0d2702] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-10 h-10 border-4 border-primary-dark border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }
@@ -43,7 +43,7 @@ function RequireAuth({ children, allowedRoles }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#0d2702] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-primary-dark border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -76,7 +76,7 @@ function RootRedirect() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#0d2702] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-primary-dark border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }

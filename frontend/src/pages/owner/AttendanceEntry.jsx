@@ -123,7 +123,7 @@ export default function AttendanceEntry() {
       {/* Header */}
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h1 className="text-2xl font-black text-slate-800">Daily Attendance Log</h1>
+          <h1 className="text-2xl font-extrabold text-primary-dark">Daily Attendance Log</h1>
           <p className="text-slate-500 mt-1 text-sm font-medium">
             Record and update daily workforce performance metrics.
           </p>
@@ -186,14 +186,14 @@ export default function AttendanceEntry() {
         <button
           onClick={handleDiscard}
           disabled={saving}
-          className="px-6 py-2.5 border border-slate-200 text-slate-600 hover:text-[#0d2702] hover:border-[#0d2702] font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors disabled:opacity-50"
+          className="px-6 py-2.5 border border-slate-200 text-slate-600 hover:text-primary-dark hover:border-primary-dark font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors disabled:opacity-50"
         >
           Discard Changes
         </button>
         <button
           onClick={handleSaveAll}
           disabled={saving}
-          className="px-6 py-2.5 bg-[#0d2702] text-white font-bold text-sm rounded-lg hover:bg-[#0d2702]/90 transition-colors flex items-center gap-2 shadow-md disabled:opacity-50"
+          className="px-6 py-2.5 bg-primary-dark text-white font-bold text-sm rounded-lg hover:bg-primary-dark/90 transition-colors flex items-center gap-2 shadow-md disabled:opacity-50"
         >
           {saving ? "Saving..." : (
             <>

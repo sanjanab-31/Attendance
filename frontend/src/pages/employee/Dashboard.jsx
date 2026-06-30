@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 // Reusable Summary Card Component for Employee Dashboard
-function EmployeeSummaryCard({ title, value, icon: Icon, colorClass = "text-[#0d2702]" }) {
+function EmployeeSummaryCard({ title, value, icon: Icon, colorClass = "text-primary-dark" }) {
   return (
     <div className="p-4 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-between">
       <div>
@@ -119,7 +119,7 @@ export default function EmployeeDashboard() {
     <div className="space-y-6 text-slate-800 font-sans">
       {/* Header Panel */}
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0d2702]">
+        <h1 className="text-2xl font-extrabold text-primary-dark">
           Employee Dashboard
         </h1>
         <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -147,8 +147,8 @@ export default function EmployeeDashboard() {
         
         {/* Panel 1: Profile Overview */}
         <div className="p-5 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-            <User className="w-4.5 h-4.5 text-[#71d300]" /> Employment Overview
+          <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+            <User className="w-4.5 h-4.5 text-primary" /> Employment Overview
           </h3>
           <div className="grid grid-cols-2 gap-y-3.5 text-xs">
             <div>
@@ -175,15 +175,15 @@ export default function EmployeeDashboard() {
             </div>
             <div>
               <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Overtime Hourly Rate</div>
-              <div className="font-extrabold text-[#0d2702] mt-0.5">${(userProfile?.otHourRate || 0).toFixed(2)}/hr</div>
+              <div className="font-extrabold text-primary-dark mt-0.5">${(userProfile?.otHourRate || 0).toFixed(2)}/hr</div>
             </div>
           </div>
         </div>
 
         {/* Panel 2: Attendance Summary */}
         <div className="p-5 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-            <CalendarCheck className="w-4.5 h-4.5 text-[#71d300]" /> Attendance Roster Summary
+          <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+            <CalendarCheck className="w-4.5 h-4.5 text-primary" /> Attendance Roster Summary
           </h3>
           <div className="grid grid-cols-2 gap-y-3.5 text-xs">
             <div>
@@ -200,7 +200,7 @@ export default function EmployeeDashboard() {
             </div>
             <div>
               <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Overtime Hours</div>
-              <div className="font-extrabold text-[#0d2702] mt-0.5">{totalOTHours} hours</div>
+              <div className="font-extrabold text-primary-dark mt-0.5">{totalOTHours} hours</div>
             </div>
           </div>
         </div>
@@ -212,7 +212,7 @@ export default function EmployeeDashboard() {
         
         {/* Attendance List */}
         <div className="p-5 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-xs font-bold text-[#0d2702] border-b border-slate-100 pb-2">Recent Shifts Worked</h3>
+          <h3 className="text-xs font-bold text-primary-dark border-b border-slate-100 pb-2">Recent Shifts Worked</h3>
           <div className="space-y-2">
             {attendanceLogs.length === 0 ? (
               <p className="text-[11px] text-slate-400 font-semibold py-4 text-center">No shifts logged yet.</p>
@@ -234,7 +234,7 @@ export default function EmployeeDashboard() {
 
         {/* Payments List */}
         <div className="p-5 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-xs font-bold text-[#0d2702] border-b border-slate-100 pb-2">Recent Salary Payouts</h3>
+          <h3 className="text-xs font-bold text-primary-dark border-b border-slate-100 pb-2">Recent Salary Payouts</h3>
           <div className="space-y-2">
             {payments.length === 0 ? (
               <p className="text-[11px] text-slate-400 font-semibold py-4 text-center">No payouts processed yet.</p>
@@ -253,7 +253,7 @@ export default function EmployeeDashboard() {
 
         {/* Advances List */}
         <div className="p-5 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-xs font-bold text-[#0d2702] border-b border-slate-100 pb-2">Recent Advances Issued</h3>
+          <h3 className="text-xs font-bold text-primary-dark border-b border-slate-100 pb-2">Recent Advances Issued</h3>
           <div className="space-y-2">
             {advances.length === 0 ? (
               <p className="text-[11px] text-slate-400 font-semibold py-4 text-center">No advances issued yet.</p>

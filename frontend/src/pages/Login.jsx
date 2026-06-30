@@ -72,10 +72,10 @@ export default function Login() {
     <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center px-4 font-sans">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-lg p-8 shadow-sm">
         <div className="text-center mb-6">
-          <div className="inline-flex p-3 bg-slate-100 rounded-lg mb-3 text-[#0d2702]">
+          <div className="inline-flex p-3 bg-slate-100 rounded-lg mb-3 text-primary-dark">
             <Sparkles className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#0d2702]">
+          <h1 className="text-2xl font-bold tracking-tight text-primary-dark">
             ESA Attendance
           </h1>
           <p className="text-slate-500 mt-1 text-xs font-semibold">
@@ -93,7 +93,7 @@ export default function Login() {
             }}
             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all ${
               activeTab === "owner"
-                ? "bg-[#0d2702] text-white shadow-sm"
+                ? "bg-primary-dark text-white shadow-sm"
                 : "text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -108,7 +108,7 @@ export default function Login() {
             }}
             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all ${
               activeTab === "employee"
-                ? "bg-[#0d2702] text-white shadow-sm"
+                ? "bg-primary-dark text-white shadow-sm"
                 : "text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -137,7 +137,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={activeTab === "owner" ? "owner@company.com" : "employee@company.com"}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-slate-900 placeholder-slate-400 outline-none transition-all text-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 placeholder-slate-400 outline-none transition-all text-sm"
               />
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowForgotModal(true)}
-                  className="text-[10px] text-[#0d2702] hover:text-[#71d300] font-bold transition-colors"
+                  className="text-[10px] text-primary-dark hover:text-primary font-bold transition-colors"
                 >
                   Forgot Password?
                 </button>
@@ -165,7 +165,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-slate-900 placeholder-slate-400 outline-none transition-all text-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 placeholder-slate-400 outline-none transition-all text-sm"
               />
             </div>
           </div>
@@ -173,7 +173,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-[#0d2702] hover:bg-[#153e03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
+            className="w-full py-2.5 bg-primary-dark hover:bg-[#153e03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
           >
             {loading ? "Signing In..." : `Sign In as ${activeTab}`}
           </button>
@@ -190,7 +190,7 @@ export default function Login() {
       {showForgotModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50">
           <div className="w-full max-w-md bg-white border border-slate-200 rounded-lg p-6 shadow-xl relative">
-            <h2 className="text-lg font-bold text-[#0d2702] mb-1">Owner Password Recovery</h2>
+            <h2 className="text-lg font-bold text-primary-dark mb-1">Owner Password Recovery</h2>
             <p className="text-xs text-slate-500 mb-5">
               Enter your owner email address. We will send you an email reset link.
             </p>
@@ -217,7 +217,7 @@ export default function Login() {
                   value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
                   placeholder="owner@company.com"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-slate-900 outline-none transition-all text-xs"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-slate-900 outline-none transition-all text-xs"
                 />
               </div>
 
@@ -232,7 +232,7 @@ export default function Login() {
                 <button
                   type="submit"
                   disabled={forgotLoading || resetSent}
-                  className="px-4.5 py-2 bg-[#0d2702] hover:bg-[#153e03] text-white font-bold text-xs rounded-lg transition-all disabled:opacity-50"
+                  className="px-4.5 py-2 bg-primary-dark hover:bg-[#153e03] text-white font-bold text-xs rounded-lg transition-all disabled:opacity-50"
                 >
                   {forgotLoading ? "Sending..." : "Send Link"}
                 </button>

@@ -74,8 +74,8 @@ export default function EmployeeProfile() {
     <div className="max-w-5xl mx-auto space-y-6 text-slate-800 font-sans">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0d2702] flex items-center gap-3">
-          <User className="w-7 h-7 text-[#0d2702]" />
+        <h1 className="text-2xl font-extrabold text-primary-dark flex items-center gap-3">
+          <User className="w-7 h-7 text-primary-dark" />
           My Profile Details
         </h1>
         <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -89,8 +89,8 @@ export default function EmployeeProfile() {
         <div className="lg:col-span-2 space-y-6">
           {/* Read Only Details */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-5">
-            <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-              <User className="w-4 h-4 text-[#0d2702]" /> Personal & Contact Info
+            <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+              <User className="w-4 h-4 text-primary-dark" /> Personal & Contact Info
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold">
@@ -133,8 +133,8 @@ export default function EmployeeProfile() {
 
           {/* Change Password Card */}
           <form onSubmit={handleUpdatePassword} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5 flex items-center gap-2">
-              <Lock className="w-4 h-4 text-[#0d2702]" /> Change Portal Password
+            <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5 flex items-center gap-2">
+              <Lock className="w-4 h-4 text-primary-dark" /> Change Portal Password
             </h3>
             
             {passSuccess && (
@@ -163,7 +163,7 @@ export default function EmployeeProfile() {
             <button
               type="submit"
               disabled={passLoading}
-              className="py-2 px-5 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="py-2 px-5 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               Update Password
             </button>
@@ -177,11 +177,11 @@ export default function EmployeeProfile() {
             <div className="grid grid-cols-2 gap-3 font-semibold">
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
                 <div className="text-[9px] text-slate-400 uppercase font-bold">Regular Hour</div>
-                <div className="text-base font-extrabold text-[#0d2702] mt-0.5">${activeRate.hourRate?.toFixed(2)}/hr</div>
+                <div className="text-base font-extrabold text-primary-dark mt-0.5">${activeRate.hourRate?.toFixed(2)}/hr</div>
               </div>
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
                 <div className="text-[9px] text-slate-400 uppercase font-bold">Overtime Hour</div>
-                <div className="text-base font-extrabold text-[#0d2702] mt-0.5">${activeRate.otHourRate?.toFixed(2)}/hr</div>
+                <div className="text-base font-extrabold text-primary-dark mt-0.5">${activeRate.otHourRate?.toFixed(2)}/hr</div>
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@ export default function EmployeeProfile() {
               {rateHistory.map((rate) => (
                 <div key={rate.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center text-xs">
                   <div>
-                    <div className="font-bold text-[#0d2702]">
+                    <div className="font-bold text-primary-dark">
                       Reg: ${rate.hourRate?.toFixed(2)} | OT: ${rate.otHourRate?.toFixed(2)}
                     </div>
                     <div className="text-[9px] text-slate-400 font-semibold mt-0.5">Effective: {rate.effectiveDate}</div>

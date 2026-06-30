@@ -2,20 +2,26 @@
 
 @theme {
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
 }
 
 :root {
-  --text: #0d2702;
-  --text-muted: #475569;
-  --bg-main: #f8fafc;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --bg-main: #f1f5f9;
   --bg-card: #ffffff;
   --border: #e2e8f0;
-  --primary: #71d300;
-  --primary-dark: #0d2702;
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
   
   background-color: var(--bg-main);
   color: var(--text);
   font-family: var(--font-sans);
+}
+
+* {
+  font-family: 'Poppins', sans-serif !important;
 }
 
 body {

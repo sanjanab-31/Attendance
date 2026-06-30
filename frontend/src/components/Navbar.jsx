@@ -7,7 +7,7 @@ export default function Navbar({ onToggleSidebar }) {
         {/* Burger Button for Mobile Screens */}
         <button
           onClick={onToggleSidebar}
-          className="p-1.5 hover:bg-slate-50 border border-slate-200 rounded-lg text-[#0d2702] transition-colors bg-white shadow-sm"
+          className="p-1.5 hover:bg-slate-50 border border-slate-200 rounded-lg text-primary-dark transition-colors bg-white shadow-sm"
           title="Open Menu"
         >
           <Menu className="w-5 h-5" />

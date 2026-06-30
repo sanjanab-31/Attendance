@@ -424,7 +424,7 @@ export default function EmployeeDetail() {
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0d2702]">{employee?.name}</h1>
+          <h1 className="text-2xl font-extrabold text-primary-dark">{employee?.name}</h1>
           <p className="text-slate-500 mt-0.5 text-xs font-semibold">
             Manage employee personal records, credential resets, and salary payments.
           </p>
@@ -435,7 +435,7 @@ export default function EmployeeDetail() {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
           <div className="text-[10px] uppercase font-bold text-slate-400">Total Days Worked</div>
-          <div className="text-lg font-extrabold text-[#0d2702] mt-0.5">{attendanceSummary.totalDaysWorked} days</div>
+          <div className="text-lg font-extrabold text-primary-dark mt-0.5">{attendanceSummary.totalDaysWorked} days</div>
         </div>
         <div className="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
           <div className="text-[10px] uppercase font-bold text-slate-400">Salary Earned</div>
@@ -471,7 +471,7 @@ export default function EmployeeDetail() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold transition-all border-b-2 -mb-0.5 ${
                 activeTab === tab.id
-                  ? "border-[#71d300] text-[#0d2702]"
+                  ? "border-primary text-primary-dark"
                   : "border-transparent text-slate-500 hover:text-slate-700"
               }`}
             >
@@ -489,7 +489,7 @@ export default function EmployeeDetail() {
         {activeTab === "profile" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <form onSubmit={handleUpdateProfile} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Personal Information</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Personal Information</h3>
               {profileSuccess && (
                 <div className="p-3 bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs rounded-lg flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
@@ -536,7 +536,7 @@ export default function EmployeeDetail() {
                   <textarea
                     value={editProfile.address}
                     onChange={(e) => setEditProfile({ ...editProfile, address: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none resize-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none resize-none"
                     rows="2"
                   />
                 </div>
@@ -544,7 +544,7 @@ export default function EmployeeDetail() {
               <button
                 type="submit"
                 disabled={profileLoading}
-                className="w-full py-2 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+                className="w-full py-2 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
               >
                 Save Profile Details
               </button>
@@ -552,7 +552,7 @@ export default function EmployeeDetail() {
 
             {/* Reset Password */}
             <form onSubmit={handleResetPassword} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Reset Portal Access</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Reset Portal Access</h3>
               <Input
                 label="New Temporary Password"
                 value={tempPassword}
@@ -577,7 +577,7 @@ export default function EmployeeDetail() {
         {activeTab === "rates" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <form onSubmit={handleAddRate} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Revise Salary Rates</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Revise Salary Rates</h3>
               {rateSuccess && (
                 <div className="p-3 bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs rounded-lg flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
@@ -612,7 +612,7 @@ export default function EmployeeDetail() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+                className="w-full py-2 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
               >
                 Apply New Rates
               </button>
@@ -620,12 +620,12 @@ export default function EmployeeDetail() {
 
             {/* History logs */}
             <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Salary Revision History</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Salary Revision History</h3>
               <div className="space-y-2 max-h-60 overflow-y-auto">
                 {rateHistory.map((rate) => (
                   <div key={rate.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center text-xs">
                     <div>
-                      <div className="font-bold text-[#0d2702]">
+                      <div className="font-bold text-primary-dark">
                         Reg: ${rate.hourRate.toFixed(2)} | OT: ${rate.otHourRate.toFixed(2)}
                       </div>
                       <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Effective: {rate.effectiveDate}</div>
@@ -641,7 +641,7 @@ export default function EmployeeDetail() {
         {activeTab === "payments" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <form onSubmit={handleAddPayment} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Process Salary Payment</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Process Salary Payment</h3>
               {paySuccess && (
                 <div className="p-3 bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs rounded-lg flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
@@ -668,7 +668,7 @@ export default function EmployeeDetail() {
                   <select
                     value={paymentForm.method}
                     onChange={(e) => setPaymentForm({ ...paymentForm, method: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="Cash">Cash</option>
                     <option value="UPI">UPI</option>
@@ -692,14 +692,14 @@ export default function EmployeeDetail() {
                     placeholder="e.g. Partial salary payout for June first half"
                     value={paymentForm.remarks}
                     onChange={(e) => setPaymentForm({ ...paymentForm, remarks: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
               </div>
               <button
                 type="submit"
                 disabled={payLoading}
-                className="w-full py-2 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                className="w-full py-2 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
               >
                 {payLoading ? "Processing..." : "Process Payout"}
               </button>
@@ -707,7 +707,7 @@ export default function EmployeeDetail() {
 
             {/* Payments list history */}
             <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Salary Payout History</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Salary Payout History</h3>
               <div className="space-y-2.5 max-h-72 overflow-y-auto">
                 {paymentsHistory.length === 0 ? (
                   <p className="text-xs text-slate-400 font-semibold text-center py-6">No payments processed yet.</p>
@@ -715,7 +715,7 @@ export default function EmployeeDetail() {
                   paymentsHistory.map((p) => (
                     <div key={p.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center text-xs">
                       <div>
-                        <div className="font-bold text-[#0d2702]">Payment of ${p.amount.toFixed(2)}</div>
+                        <div className="font-bold text-primary-dark">Payment of ${p.amount.toFixed(2)}</div>
                         <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Method: {p.method} | Date: {p.date}</div>
                         {p.remarks && <div className="text-[10px] text-slate-500 italic mt-0.5">"{p.remarks}"</div>}
                       </div>
@@ -731,7 +731,7 @@ export default function EmployeeDetail() {
         {activeTab === "advances" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <form onSubmit={handleAddAdvance} className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Issue Salary Advance</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Issue Salary Advance</h3>
               {advSuccess && (
                 <div className="p-3 bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs rounded-lg flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
@@ -758,7 +758,7 @@ export default function EmployeeDetail() {
                   <select
                     value={advanceForm.method}
                     onChange={(e) => setAdvanceForm({ ...advanceForm, method: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   >
                     <option value="Cash">Cash</option>
                     <option value="UPI">UPI</option>
@@ -782,14 +782,14 @@ export default function EmployeeDetail() {
                     placeholder="e.g. Urgent medical expense advance"
                     value={advanceForm.remarks}
                     onChange={(e) => setAdvanceForm({ ...advanceForm, remarks: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                   />
                 </div>
               </div>
               <button
                 type="submit"
                 disabled={advLoading}
-                className="w-full py-2 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                className="w-full py-2 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
               >
                 {advLoading ? "Issuing..." : "Issue Advance"}
               </button>
@@ -797,7 +797,7 @@ export default function EmployeeDetail() {
 
             {/* Advances list history */}
             <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-[#0d2702] border-b border-slate-100 pb-2.5">Salary Advance History</h3>
+              <h3 className="text-sm font-bold text-primary-dark border-b border-slate-100 pb-2.5">Salary Advance History</h3>
               <div className="space-y-2.5 max-h-72 overflow-y-auto">
                 {advancesHistory.length === 0 ? (
                   <p className="text-xs text-slate-400 font-semibold text-center py-6">No advance records found.</p>
@@ -805,7 +805,7 @@ export default function EmployeeDetail() {
                   advancesHistory.map((a) => (
                     <div key={a.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center text-xs">
                       <div>
-                        <div className="font-bold text-[#0d2702]">Advance of ${a.amount.toFixed(2)}</div>
+                        <div className="font-bold text-primary-dark">Advance of ${a.amount.toFixed(2)}</div>
                         <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Method: {a.method || "Cash"} | Date: {a.date}</div>
                         {a.remarks && <div className="text-[10px] text-slate-500 italic mt-0.5">"{a.remarks}"</div>}
                       </div>
@@ -821,8 +821,8 @@ export default function EmployeeDetail() {
         {activeTab === "ledger" && (
           <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-4">
-              <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2">
-                <BookOpen className="w-4.5 h-4.5 text-[#0d2702]" /> Combined Financial Ledger Roster
+              <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2">
+                <BookOpen className="w-4.5 h-4.5 text-primary-dark" /> Combined Financial Ledger Roster
               </h3>
               <button
                 onClick={exportLedgerCSV}
@@ -842,7 +842,7 @@ export default function EmployeeDetail() {
                   placeholder="Search Remarks, Method, Date..."
                   value={ledgerSearch}
                   onChange={(e) => setLedgerSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none"
                 />
               </div>
 
@@ -851,7 +851,7 @@ export default function EmployeeDetail() {
                 <select
                   value={ledgerTypeFilter}
                   onChange={(e) => setLedgerTypeFilter(e.target.value)}
-                  className="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+                  className="w-full px-2 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
                 >
                   <option value="all">All Transactions</option>
                   <option value="earnings">Earnings Only</option>
@@ -902,7 +902,7 @@ export default function EmployeeDetail() {
                         <td className="py-3 px-4">
                           <span className={`inline-block text-[9px] font-extrabold px-2 py-0.5 rounded-full ${
                             item.type === "Earnings"
-                              ? "bg-[#71d300]/15 text-[#0d2702] border border-[#71d300]/25"
+                              ? "bg-primary/15 text-primary-dark border border-primary/25"
                               : item.type === "Payment"
                               ? "bg-slate-100 text-slate-700 border border-slate-200"
                               : "bg-amber-50 text-amber-800 border border-amber-100"

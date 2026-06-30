@@ -143,7 +143,7 @@ export default function OwnerDashboard() {
     <div className="space-y-6">
       {/* Header Section */}
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0d2702]">Owner Dashboard</h1>
+        <h1 className="text-2xl font-extrabold text-primary-dark">Owner Dashboard</h1>
         <p className="text-slate-500 mt-0.5 text-xs font-semibold">
           Real-time overview of employee attendance, rosters, and operational stats.
         </p>
@@ -162,7 +162,7 @@ export default function OwnerDashboard() {
           title="Total Employees"
           value={totalEmployees}
           icon={Users}
-          valueClass="text-[#0d2702]"
+          valueClass="text-primary-dark"
         />
         <SummaryCard
           title="Present Today"
@@ -194,7 +194,7 @@ export default function OwnerDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Quick Shortcuts */}
         <div className="lg:col-span-1 p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#0d2702]">Quick Actions</h3>
+          <h3 className="text-sm font-bold text-primary-dark">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-3">
             <QuickAction to="/owner/employees" label="Add Employee" icon={PlusCircle} />
             <QuickAction to="/owner/attendance" label="Attendance" icon={Calendar} />
@@ -213,8 +213,8 @@ export default function OwnerDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Payments Feed */}
         <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2">
-            <CreditCard className="w-4.5 h-4.5 text-[#71d300]" /> Recent Payments Issued
+          <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2">
+            <CreditCard className="w-4.5 h-4.5 text-primary" /> Recent Payments Issued
           </h3>
           <div className="space-y-2.5">
             {recentPayments.length === 0 ? (
@@ -226,7 +226,7 @@ export default function OwnerDashboard() {
                     <div className="font-bold text-slate-900">{p.name}</div>
                     <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Method: {p.method} | Date: {p.date}</div>
                   </div>
-                  <div className="font-extrabold text-[#0d2702]">+₹{p.amount.toFixed(2)}</div>
+                  <div className="font-extrabold text-primary-dark">+₹{p.amount.toFixed(2)}</div>
                 </div>
               ))
             )}
@@ -235,8 +235,8 @@ export default function OwnerDashboard() {
 
         {/* Recent Advances Feed */}
         <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2">
-            <Coins className="w-4.5 h-4.5 text-[#71d300]" /> Recent Advances Issued
+          <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2">
+            <Coins className="w-4.5 h-4.5 text-primary" /> Recent Advances Issued
           </h3>
           <div className="space-y-2.5">
             {recentAdvances.length === 0 ? (

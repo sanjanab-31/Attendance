@@ -202,8 +202,8 @@ export default function EmployeePayments() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0d2702] flex items-center gap-3">
-            <DollarSign className="w-7 h-7 text-[#0d2702]" />
+          <h1 className="text-2xl font-extrabold text-primary-dark flex items-center gap-3">
+            <DollarSign className="w-7 h-7 text-primary-dark" />
             My Ledger & Financial History
           </h1>
           <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -214,7 +214,7 @@ export default function EmployeePayments() {
         {/* Download Slip */}
         <button
           onClick={handleExportCSV}
-          className="flex items-center gap-1.5 px-4 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+          className="flex items-center gap-1.5 px-4 py-2 bg-primary-dark hover:bg-[#163c03] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
         >
           <Download className="w-4 h-4" /> Download Wage Slip
         </button>
@@ -249,7 +249,7 @@ export default function EmployeePayments() {
       {/* Unified Timeline Ledger */}
       <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-100 pb-3">
-          <h3 className="text-sm font-bold text-[#0d2702] uppercase tracking-wider">
+          <h3 className="text-sm font-bold text-primary-dark uppercase tracking-wider">
             Combined Transaction Timeline
           </h3>
 
@@ -262,14 +262,14 @@ export default function EmployeePayments() {
                 placeholder="Search..."
                 value={ledgerSearch}
                 onChange={(e) => setLedgerSearch(e.target.value)}
-                className="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none w-40"
+                className="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none w-40"
               />
             </div>
 
             <select
               value={ledgerPreset}
               onChange={(e) => setLedgerPreset(e.target.value)}
-              className="px-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+              className="px-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
             >
               <option value="all">All Dates</option>
               <option value="today">Today</option>
@@ -322,7 +322,7 @@ export default function EmployeePayments() {
                     <td className="py-3 px-4">
                       <span className={`inline-block text-[9px] font-extrabold px-2 py-0.5 rounded-full ${
                         item.type === "Earnings"
-                          ? "bg-[#71d300]/15 text-[#0d2702] border border-[#71d300]/25"
+                          ? "bg-primary/15 text-primary-dark border border-primary/25"
                           : item.type === "Payment"
                           ? "bg-slate-100 text-slate-700 border border-slate-200"
                           : "bg-amber-50 text-amber-800 border border-amber-100"

@@ -3,27 +3,26 @@ import EmployeeTableRow from "./EmployeeTableRow";
 
 export default function EmployeeTable({ employees }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase text-[10px] font-bold tracking-wider">
-              <th className="py-3.5 px-6">Employee</th>
-              <th className="py-3.5 px-6">Age</th>
-              <th className="py-3.5 px-6">Phone</th>
-              <th className="py-3.5 px-6">Email</th>
-              <th className="py-3.5 px-6">Joined Date</th>
-              <th className="py-3.5 px-6">Hour Rate</th>
-              <th className="py-3.5 px-6">OT Hour Rate</th>
-              <th className="py-3.5 px-6 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {employees.map((emp) => (
-              <EmployeeTableRow key={emp.uid} employee={emp} />
-            ))}
-          </tbody>
-        </table>
+    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col h-full">
+      <div className="bg-slate-50 border-b border-slate-200 pr-1.5"> {/* pr-1.5 compensates for thin-scrollbar width visually */}
+        <div className="grid grid-cols-[minmax(0,1.5fr)_minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-4 px-6 py-4 text-left text-[10px] font-bold uppercase tracking-wider text-slate-500 items-center">
+          <div>Employee</div>
+          <div>Age</div>
+          <div>Phone</div>
+          <div>Email</div>
+          <div>Hour Rate</div>
+          <div>OT Hour Rate</div>
+          <div className="text-right">Actions</div>
+        </div>
+      </div>
+
+      {/* Scrollable Body */}
+      <div className="flex-1 overflow-auto thin-scrollbar bg-white">
+        <div className="flex flex-col">
+          {employees.map((emp) => (
+            <EmployeeTableRow key={emp.uid} employee={emp} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -406,7 +406,7 @@ export default function Reports() {
     <div className="flex-1 flex flex-col min-h-0 text-slate-800 font-sans print:bg-white print:p-0 overflow-hidden">
       {/* Print-Only Header Block */}
       <div className="hidden print:block border-b-2 border-slate-300 pb-5 mb-5">
-        <h1 className="text-2xl font-bold uppercase tracking-tight text-[#0d2702]">{companyName}</h1>
+        <h1 className="text-2xl font-bold uppercase tracking-tight text-primary-dark">{companyName}</h1>
         <h2 className="text-lg font-bold text-slate-700 capitalize mt-1">{activeReport} Roster Report</h2>
         <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 font-semibold mt-4">
           <div>Generated Date: {new Date().toLocaleDateString()}</div>
@@ -419,7 +419,7 @@ export default function Reports() {
       {/* Standard UI Layout (hidden on print) */}
       <div className="print:hidden flex flex-col gap-6 flex-1 min-h-0 overflow-hidden">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0d2702]">Reports & Analytics</h1>
+          <h1 className="text-2xl font-extrabold text-primary-dark">Reports & Analytics</h1>
           <p className="text-slate-500 mt-0.5 text-xs font-semibold">
             Centralized business overview. Generate attendance, salary audits, and financial summaries.
           </p>
@@ -448,11 +448,11 @@ export default function Reports() {
                 onClick={() => setActiveReport(report.id)}
                 className={`flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-full transition-colors shadow-sm ${
                   isActive
-                    ? "bg-[#71d300] text-[#0d2702]"
+                    ? "bg-primary text-primary-dark"
                     : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
                 }`}
               >
-                {/* <Icon className={`w-4 h-4 ${isActive ? "text-[#0d2702]" : "text-slate-400"}`} /> */}
+                {/* <Icon className={`w-4 h-4 ${isActive ? "text-primary-dark" : "text-slate-400"}`} /> */}
                 {report.label}
               </button>
             );
@@ -465,13 +465,13 @@ export default function Reports() {
           
           {/* Panel 1: Working Hours & OT Allocation */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2 border-b border-slate-100 pb-2">
-              <Clock className="w-4.5 h-4.5 text-[#71d300]" /> Working Hours Analytics
+            <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2 border-b border-slate-100 pb-2">
+              <Clock className="w-4.5 h-4.5 text-primary" /> Working Hours Analytics
             </h3>
             <div className="grid grid-cols-3 gap-3">
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Regular Hours</div>
-                <div className="text-base font-extrabold text-[#0d2702] mt-1">{totalWorkingHours} hrs</div>
+                <div className="text-base font-extrabold text-primary-dark mt-1">{totalWorkingHours} hrs</div>
               </div>
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-center">
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Overtime Hours</div>
@@ -492,7 +492,7 @@ export default function Reports() {
               </div>
               <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden flex">
                 <div
-                  className="bg-[#71d300]"
+                  className="bg-primary"
                   style={{ width: `${(totalWorkingHours / (totalWorkingHours + totalOTHours || 1)) * 100}%` }}
                 ></div>
                 <div
@@ -501,7 +501,7 @@ export default function Reports() {
                 ></div>
               </div>
               <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400">
-                <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-[#71d300]"></span> Regular Hours</div>
+                <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-primary"></span> Regular Hours</div>
                 <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-amber-500"></span> Overtime Hours</div>
               </div>
             </div>
@@ -509,13 +509,13 @@ export default function Reports() {
 
           {/* Panel 2: Payroll Financial Summary Bar Charts */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2 border-b border-slate-100 pb-2">
-              <IndianRupee className="w-4.5 h-4.5 text-[#71d300]" /> Payroll Financial Breakdown
+            <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2 border-b border-slate-100 pb-2">
+              <IndianRupee className="w-4.5 h-4.5 text-primary" /> Payroll Financial Breakdown
             </h3>
             <div className="space-y-3">
               {[
                 { label: "Salary Earned", amount: totalSalaryEarned, color: "bg-slate-700" },
-                { label: "Salary Paid", amount: totalSalaryPaid, color: "bg-[#71d300]" },
+                { label: "Salary Paid", amount: totalSalaryPaid, color: "bg-primary" },
                 { label: "Pending Outstanding", amount: totalPendingSalary, color: "bg-rose-500" },
                 { label: "Advances Given", amount: totalAdvanceGiven, color: "bg-amber-500" }
               ].map((item, index) => {
@@ -538,8 +538,8 @@ export default function Reports() {
 
           {/* Panel 3: Most Active Employees Leaderboard */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2 border-b border-slate-100 pb-2">
-              <Award className="w-4.5 h-4.5 text-[#71d300]" /> Leaderboard: Days Worked
+            <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2 border-b border-slate-100 pb-2">
+              <Award className="w-4.5 h-4.5 text-primary" /> Leaderboard: Days Worked
             </h3>
             <div className="space-y-3">
               {activeByDays.length === 0 ? (
@@ -555,7 +555,7 @@ export default function Reports() {
                         <span>{item.days} active days</span>
                       </div>
                       <div className="w-full h-2 bg-slate-50 border border-slate-150 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#71d300] rounded-full" style={{ width: `${pct}%` }}></div>
+                        <div className="h-full bg-primary rounded-full" style={{ width: `${pct}%` }}></div>
                       </div>
                     </div>
                   );
@@ -566,8 +566,8 @@ export default function Reports() {
 
           {/* Panel 4: Hours Allocation Leaders */}
           <div className="p-6 bg-white border border-slate-200 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-[#0d2702] flex items-center gap-2 border-b border-slate-100 pb-2">
-              <Activity className="w-4.5 h-4.5 text-[#71d300]" /> Leaders: Total Shift Hours
+            <h3 className="text-sm font-bold text-primary-dark flex items-center gap-2 border-b border-slate-100 pb-2">
+              <Activity className="w-4.5 h-4.5 text-primary" /> Leaders: Total Shift Hours
             </h3>
             <div className="space-y-3">
               {activeByHours.length === 0 ? (
@@ -601,7 +601,7 @@ export default function Reports() {
           
           {/* Title, Search & Export Actions Row (hidden on print) */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-3 print:hidden">
-            <h2 className="text-sm font-bold text-[#0d2702] uppercase tracking-wider">
+            <h2 className="text-sm font-bold text-primary-dark uppercase tracking-wider">
               {activeReport} Dataset Roster
             </h2>
             <div className="flex flex-wrap items-center gap-2">
@@ -613,7 +613,7 @@ export default function Reports() {
                   placeholder="Search name..."
                   value={searchTerm}
                   onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-                  className="pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none w-52 shadow-sm transition-colors hover:border-slate-300"
+                  className="pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-xs font-semibold text-slate-700 outline-none w-52 shadow-sm transition-colors hover:border-slate-300"
                 />
               </div>
 
@@ -622,7 +622,7 @@ export default function Reports() {
                 <select
                   value={datePreset}
                   onChange={(e) => setDatePreset(e.target.value)}
-                  className="appearance-none pl-3 pr-8 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none w-36 shadow-sm transition-colors hover:border-slate-300 cursor-pointer"
+                  className="appearance-none pl-3 pr-8 py-2 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-xs font-semibold text-slate-700 outline-none w-36 shadow-sm transition-colors hover:border-slate-300 cursor-pointer"
                 >
                   <option value="today">Today</option>
                   <option value="thisWeek">This Week</option>
@@ -639,13 +639,13 @@ export default function Reports() {
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
+                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
                   />
                   <input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
+                    className="px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-xs font-semibold text-slate-700 outline-none shadow-sm transition-colors hover:border-slate-300"
                   />
                 </>
               )}
@@ -654,7 +654,7 @@ export default function Reports() {
               <div className="relative">
                 <button
                   onClick={() => setShowExportMenu(!showExportMenu)}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-[#0d2702] hover:bg-[#71d300] text-white hover:text-[#0d2702] text-xs font-bold uppercase tracking-wider rounded-lg transition-colors border border-transparent shadow-sm"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-primary-dark hover:bg-primary text-white hover:text-primary-dark text-xs font-bold uppercase tracking-wider rounded-lg transition-colors border border-transparent shadow-sm"
                 >
                   <Download className="w-4 h-4" /> Export
                 </button>
@@ -754,7 +754,7 @@ export default function Reports() {
                         <td className="py-2 px-4 text-right font-mono">₹{s.earned.toFixed(2)}</td>
                         <td className="py-2 px-4 text-right font-mono">₹{s.paid.toFixed(2)}</td>
                         <td className="py-2 px-4 text-right font-mono">₹{s.remaining.toFixed(2)}</td>
-                        <td className="py-2 px-4 text-right font-mono text-[#0d2702] font-bold">₹{s.payable.toFixed(2)}</td>
+                        <td className="py-2 px-4 text-right font-mono text-primary-dark font-bold">₹{s.payable.toFixed(2)}</td>
                       </tr>
                     ))}
 
@@ -763,7 +763,7 @@ export default function Reports() {
                       <tr key={i} className="hover:bg-slate-50/50">
                         <td className="py-2 px-4 font-bold text-slate-900">{p.date}</td>
                         <td className="py-2 px-4 text-slate-900 font-bold">{p.name}</td>
-                        <td className="py-2 px-4 text-right text-[#0d2702] font-extrabold font-mono">₹{p.amount.toFixed(2)}</td>
+                        <td className="py-2 px-4 text-right text-primary-dark font-extrabold font-mono">₹{p.amount.toFixed(2)}</td>
                         <td className="py-2 px-4">{p.method}</td>
                         <td className="py-2 px-4 text-slate-400 italic">{p.remarks}</td>
                       </tr>
@@ -787,7 +787,7 @@ export default function Reports() {
                         <td className="py-2 px-4 text-center">{e.days} days</td>
                         <td className="py-2 px-4 text-center">{e.hours} hrs</td>
                         <td className="py-2 px-4 text-center">{e.ot} hrs</td>
-                        <td className="py-2 px-4 text-right font-mono text-[#0d2702] font-bold">₹{e.earned.toFixed(2)}</td>
+                        <td className="py-2 px-4 text-right font-mono text-primary-dark font-bold">₹{e.earned.toFixed(2)}</td>
                       </tr>
                     ))}
 
@@ -799,7 +799,7 @@ export default function Reports() {
                         <td className="py-2 px-4 text-right font-mono text-emerald-600">₹{p.paid.toFixed(2)}</td>
                         <td className="py-2 px-4 text-right font-mono text-amber-600">₹{p.pending.toFixed(2)}</td>
                         <td className="py-2 px-4 text-right font-mono text-rose-500">₹{p.advance.toFixed(2)}</td>
-                        <td className="py-2 px-4 text-right font-mono font-extrabold text-[#0d2702] bg-[#71d300]/10">₹{p.net.toFixed(2)}</td>
+                        <td className="py-2 px-4 text-right font-mono font-extrabold text-primary-dark bg-primary/10">₹{p.net.toFixed(2)}</td>
                       </tr>
                     ))}
                 </tbody>

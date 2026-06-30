@@ -7,33 +7,28 @@ export default function EmployeeTableRow({ employee }) {
   const otHourRate = employee.otHourRate !== undefined ? parseFloat(employee.otHourRate) : 0;
 
   return (
-    <tr className="hover:bg-slate-50 transition-colors">
-      <td className="py-3 px-6">
+    <div className="grid grid-cols-[minmax(0,1.5fr)_minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-4 px-6 py-3 items-center hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-b-0 text-sm bg-white">
+      <div>
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
-            <User className="w-4 h-4 text-[#0d2702]" />
-          </div>
           <div>
             <div className="font-bold text-slate-900">{employee.name}</div>
           </div>
         </div>
-      </td>
-      <td className="py-3 px-6 text-slate-600 font-medium">{employee.age} yrs</td>
-      <td className="py-3 px-6 text-slate-600 font-medium">{employee.phone?.replace(/^\+\d{1,3}\s?-?/, '')}</td>
-      <td className="py-3 px-6 text-slate-600 font-medium">{employee.email}</td>
-      <td className="py-3 px-6 text-slate-600 font-medium">{employee.dateOfJoining}</td>
-      <td className="py-3 px-6 text-slate-700 font-bold">${hourRate.toFixed(2)}/hr</td>
-      <td className="py-3 px-6 text-slate-700 font-bold">${otHourRate.toFixed(2)}/hr</td>
+      </div>
+      <div className="text-slate-600 font-medium">{employee.age} yrs</div>
+      <div className="text-slate-600 font-medium">{employee.phone?.replace(/^\+\d{1,3}\s?-?/, '')}</div>
+      <div className="text-slate-600 font-medium truncate pr-2">{employee.email}</div>
+      <div className="text-slate-700 font-medium">${hourRate.toFixed(2)}/hr</div>
+      <div className="text-slate-700 font-medium">${otHourRate.toFixed(2)}/hr</div>
 
-      <td className="py-3 px-6 text-right">
+      <div className="text-right">
         <Link
           to={`/owner/employees/${employee.uid}`}
-          className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#0d2702] hover:text-[#71d300] bg-slate-100 hover:bg-slate-200/50 px-2.5 py-1.5 rounded-lg transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary-dark hover:text-primary bg-slate-100 hover:bg-slate-200/50 px-3 py-1.5 rounded-lg transition-colors"
         >
-          View Profile
-          <ArrowRight className="w-3 h-3" />
+          View 
         </Link>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }

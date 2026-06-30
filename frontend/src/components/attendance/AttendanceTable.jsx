@@ -16,7 +16,7 @@ export default function AttendanceTable({ employees, attendanceRecords, onChange
         <div className="overflow-hidden">
           <table className="w-full text-left text-xs table-fixed min-w-[800px] border-collapse">
             <thead>
-              <tr className="bg-slate-50 text-[#0d2702] uppercase text-[11px] font-black tracking-wider">
+              <tr className="bg-slate-50 text-primary-dark uppercase text-[11px] font-black tracking-wider">
                 <th className="py-4 px-6 w-[25%]">EMPLOYEE NAME</th>
                 <th className="py-4 px-6 w-[15%]">STATUS</th>
                 <th className="py-4 px-6 w-[15%]">WORK HOURS</th>

@@ -128,8 +128,8 @@ export default function CreateEmployee() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Form UI */}
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0d2702] flex items-center gap-3">
-          <UserPlus className="w-7 h-7 text-[#0d2702]" />
+        <h1 className="text-2xl font-extrabold text-primary-dark flex items-center gap-3">
+          <UserPlus className="w-7 h-7 text-primary-dark" />
           Add New Employee
         </h1>
         <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -250,7 +250,7 @@ export default function CreateEmployee() {
               onChange={handleChange}
               placeholder="Street name, City, Zip"
               className={`w-full px-3 py-2 bg-slate-50 border rounded-lg text-slate-900 placeholder-slate-400 outline-none text-xs transition-colors ${
-                errors.address ? "border-rose-400 focus:border-rose-500" : "border-slate-200 focus:border-[#71d300]"
+                errors.address ? "border-rose-400 focus:border-rose-500" : "border-slate-200 focus:border-primary"
               }`}
             />
             {errors.address && (
@@ -270,7 +270,7 @@ export default function CreateEmployee() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-[#71d300] hover:opacity-90 text-[#0d2702] font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm active:scale-[0.98] disabled:opacity-50"
+            className="px-6 py-2 bg-primary hover:opacity-90 text-primary-dark font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm active:scale-[0.98] disabled:opacity-50"
           >
             {loading ? "Registering..." : "Create Account"}
           </button>

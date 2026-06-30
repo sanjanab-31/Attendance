@@ -94,8 +94,8 @@ export default function EmployeeAttendance() {
       {/* Header & Filters Bar */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0d2702] flex items-center gap-3">
-            <History className="w-7 h-7 text-[#0d2702]" />
+          <h1 className="text-2xl font-extrabold text-primary-dark flex items-center gap-3">
+            <History className="w-7 h-7 text-primary-dark" />
             My Attendance History
           </h1>
           <p className="text-slate-500 mt-0.5 text-xs font-semibold">
@@ -113,7 +113,7 @@ export default function EmployeeAttendance() {
               placeholder="Search date (YYYY-MM-DD)..."
               value={searchDateText}
               onChange={(e) => setSearchDateText(e.target.value)}
-              className="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none w-48"
+              className="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none w-48"
             />
           </div>
 
@@ -121,7 +121,7 @@ export default function EmployeeAttendance() {
           <select
             value={datePreset}
             onChange={(e) => setDatePreset(e.target.value)}
-            className="px-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+            className="px-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
           >
             <option value="today">Today</option>
             <option value="thisWeek">This Week</option>
@@ -176,7 +176,7 @@ export default function EmployeeAttendance() {
                       <span className={`inline-block text-[9px] font-bold px-2 py-0.5 rounded-full ${
                         log.isHoliday
                           ? "bg-amber-100 text-amber-800 border border-amber-200/50"
-                          : "bg-[#71d300]/15 text-[#0d2702] border border-[#71d300]/25"
+                          : "bg-primary/15 text-primary-dark border border-primary/25"
                       }`}>
                         {log.isHoliday ? "Holiday" : "Work"}
                       </span>

@@ -20,7 +20,7 @@ export default function DatePicker({
         onChange={onChange}
         required={required}
         className={`w-full px-3 py-2 bg-slate-50 border rounded-lg text-slate-900 outline-none text-xs transition-colors ${
-          error ? "border-rose-400 focus:border-rose-500" : "border-slate-200 focus:border-[#71d300]"
+          error ? "border-rose-400 focus:border-rose-500" : "border-slate-200 focus:border-primary"
         }`}
       />
       {error && (

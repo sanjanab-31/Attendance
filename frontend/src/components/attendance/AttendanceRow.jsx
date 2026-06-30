@@ -70,11 +70,11 @@ export default function AttendanceRow({ employee, record, onChange }) {
           <button
             type="button"
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full flex items-center justify-between px-3 py-2 bg-white border border-slate-200 hover:border-[#71d300] focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-sm text-slate-700 outline-none cursor-pointer shadow-sm transition-all"
+            className="w-full flex items-center justify-between px-3 py-2 bg-white border border-slate-200 hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-sm text-slate-700 outline-none cursor-pointer shadow-sm transition-all"
           >
             <span className="font-semibold flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${
-                currentRecord.status === 'Present' ? 'bg-[#71d300]' : 
+                currentRecord.status === 'Present' ? 'bg-primary' : 
                 currentRecord.status === 'Absent' ? 'bg-rose-500' : 'bg-amber-400'
               }`}></span>
               {currentRecord.status}
@@ -88,18 +88,18 @@ export default function AttendanceRow({ employee, record, onChange }) {
                 <button
                   type="button"
                   key={status}
-                  className={`w-full text-left px-3 py-2 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors ${currentRecord.status === status ? 'bg-slate-50 text-[#0d2702]' : 'text-slate-600'}`}
+                  className={`w-full text-left px-3 py-2 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors ${currentRecord.status === status ? 'bg-slate-50 text-primary-dark' : 'text-slate-600'}`}
                   onClick={() => {
                     handleFieldChange('status', status);
                     setDropdownOpen(false);
                   }}
                 >
                   <span className={`w-2 h-2 rounded-full ${
-                    status === 'Present' ? 'bg-[#71d300]' : 
+                    status === 'Present' ? 'bg-primary' : 
                     status === 'Absent' ? 'bg-rose-500' : 'bg-amber-400'
                   }`}></span>
                   {status}
-                  {currentRecord.status === status && <Check className="w-4 h-4 ml-auto text-[#71d300]" />}
+                  {currentRecord.status === status && <Check className="w-4 h-4 ml-auto text-primary" />}
                 </button>
               ))}
             </div>
@@ -113,19 +113,19 @@ export default function AttendanceRow({ employee, record, onChange }) {
             disabled={currentRecord.isHoliday}
             value={currentRecord.workingHours}
             onChange={(e) => handleFieldChange('workingHours', e.target.value)}
-            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
+            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">h</span>
         </div>
       </td>
       <td className="py-4 px-6 w-[15%]">
-        <div className={`relative w-24 ${currentRecord.otHours > 0 ? 'ring-1 ring-[#71d300] rounded-lg' : ''}`}>
+        <div className={`relative w-24 ${currentRecord.otHours > 0 ? 'ring-1 ring-primary rounded-lg' : ''}`}>
           <input
             type="number"
             disabled={currentRecord.isHoliday}
             value={currentRecord.otHours}
             onChange={(e) => handleFieldChange('otHours', e.target.value)}
-            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
+            className="w-full pl-3 pr-8 py-2 bg-white border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary/50 rounded-lg text-sm outline-none disabled:opacity-50 disabled:bg-slate-50 shadow-sm transition-colors"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">h</span>
         </div>
@@ -138,7 +138,7 @@ export default function AttendanceRow({ employee, record, onChange }) {
             checked={currentRecord.isHoliday}
             onChange={(e) => handleFieldChange('isHoliday', e.target.checked)}
           />
-          <div className="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#71d300]"></div>
+          <div className="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
         </label>
       </td>
       <td className="py-4 px-6 w-[20%]">
@@ -147,7 +147,7 @@ export default function AttendanceRow({ employee, record, onChange }) {
           placeholder="Add note..."
           value={currentRecord.remarks}
           onChange={(e) => handleFieldChange('remarks', e.target.value)}
-          className="w-full px-3 py-2 bg-white border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] hover:border-[#71d300]/50 rounded-lg text-sm outline-none shadow-sm placeholder:text-slate-400 placeholder:font-normal transition-colors"
+          className="w-full px-3 py-2 bg-white border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary hover:border-primary/50 rounded-lg text-sm outline-none shadow-sm placeholder:text-slate-400 placeholder:font-normal transition-colors"
         />
       </td>
     </tr>

@@ -140,7 +140,7 @@ export default function AttendanceHistoryList() {
             placeholder="Search by Employee Name..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 focus:border-[#71d300] focus:ring-1 focus:ring-[#71d300] rounded-lg text-xs outline-none"
+            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-xs outline-none"
           />
         </div>
 
@@ -150,7 +150,7 @@ export default function AttendanceHistoryList() {
           <select
             value={dateFilterType}
             onChange={(e) => setDateFilterType(e.target.value)}
-            className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+            className="w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
           >
             <option value="all">All Dates</option>
             <option value="daily">Single Day</option>
@@ -167,7 +167,7 @@ export default function AttendanceHistoryList() {
             type="date"
             value={singleDate}
             onChange={(e) => setSingleDate(e.target.value)}
-            className="px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+            className="px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
           />
         )}
 
@@ -177,14 +177,14 @@ export default function AttendanceHistoryList() {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-1/2 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+              className="w-1/2 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
             />
             <span className="text-slate-400 text-xs">to</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="w-1/2 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-[#71d300]"
+              className="w-1/2 px-2 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary"
             />
           </div>
         )}
@@ -226,7 +226,7 @@ export default function AttendanceHistoryList() {
                     <td className="py-3.5 px-6 text-center text-slate-600 font-medium">{rec.isHoliday ? "-" : rec.otHours}</td>
                     <td className="py-3.5 px-6 text-center">
                       <span className={`inline-block text-[9px] font-extrabold px-2 py-0.5 rounded-full ${
-                        rec.isHoliday ? "bg-amber-100 text-amber-800" : "bg-[#71d300]/15 text-[#0d2702]"
+                        rec.isHoliday ? "bg-amber-100 text-amber-800" : "bg-primary/15 text-primary-dark"
                       }`}>
                         {rec.isHoliday ? "Yes" : "No"}
                       </span>
@@ -239,7 +239,7 @@ export default function AttendanceHistoryList() {
                     <td className="py-3.5 px-6 text-right">
                       <button
                         onClick={() => startEdit(rec)}
-                        className="p-1.5 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 hover:text-[#0d2702] transition-colors"
+                        className="p-1.5 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 hover:text-primary-dark transition-colors"
                         title="Edit Entry"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
@@ -259,7 +259,7 @@ export default function AttendanceHistoryList() {
           <div className="bg-white border border-slate-200 rounded-lg max-w-md w-full p-6 shadow-lg space-y-4">
             <div className="flex justify-between items-start border-b border-slate-100 pb-2.5">
               <div>
-                <h3 className="text-sm font-bold text-[#0d2702]">Edit Attendance Entry</h3>
+                <h3 className="text-sm font-bold text-primary-dark">Edit Attendance Entry</h3>
                 <p className="text-[10px] text-slate-400 font-bold uppercase mt-0.5">{editingRecord.name} | {editingRecord.date}</p>
               </div>
               <button onClick={() => setEditingRecord(null)} className="p-1 hover:bg-slate-50 rounded">
@@ -289,7 +289,7 @@ export default function AttendanceHistoryList() {
                       otHours: checked ? "0" : ""
                     }));
                   }}
-                  className="w-4 h-4 text-[#71d300] border-slate-300 focus:ring-[#71d300] rounded cursor-pointer"
+                  className="w-4 h-4 text-primary border-slate-300 focus:ring-primary rounded cursor-pointer"
                 />
                 <label htmlFor="editHoliday" className="text-xs font-bold text-slate-600 cursor-pointer select-none">Mark as Holiday</label>
               </div>
@@ -302,7 +302,7 @@ export default function AttendanceHistoryList() {
                     disabled={editForm.isHoliday}
                     value={editForm.workingHours}
                     onChange={(e) => setEditForm(prev => ({ ...prev, workingHours: e.target.value }))}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none disabled:opacity-50"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none disabled:opacity-50"
                   />
                 </div>
                 <div>
@@ -312,7 +312,7 @@ export default function AttendanceHistoryList() {
                     disabled={editForm.isHoliday}
                     value={editForm.otHours}
                     onChange={(e) => setEditForm(prev => ({ ...prev, otHours: e.target.value }))}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none disabled:opacity-50"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -322,7 +322,7 @@ export default function AttendanceHistoryList() {
                 <textarea
                   value={editForm.remarks}
                   onChange={(e) => setEditForm(prev => ({ ...prev, remarks: e.target.value }))}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#71d300] rounded-lg text-xs outline-none resize-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-primary rounded-lg text-xs outline-none resize-none"
                   rows="2"
                 />
               </div>
@@ -338,7 +338,7 @@ export default function AttendanceHistoryList() {
                 <button
                   type="submit"
                   disabled={editLoading}
-                  className="px-5 py-2 bg-[#0d2702] hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
+                  className="px-5 py-2 bg-primary-dark hover:bg-[#163c03] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm disabled:opacity-50"
                 >
                   {editLoading ? "Saving..." : "Save Changes"}
                 </button>
